@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
-const Carrito = ({productosEnCarrito, productosEliminados}) => {
-  const [total, setTotal] = useState(0);
-  
-  useEffect(() => {
-    const nuevoTotal = productosEnCarrito.reduce((acc, producto) => acc + producto.price, 0);
-    setTotal(nuevoTotal);
-  }, [productosEnCarrito]);
+import { useContext } from "react";
+import { CarritoContext } from "../context/carritoContext";
+import { RxCross1 } from "react-icons/rx";
 
-  if (productosEnCarrito.length === 0) {
+const Carrito = () => {
+  const {carrito, eliminarCarrito,total} = useContext(CarritoContext);
+
+  if (carrito.length === 0) {
     return 
   }
   return (
@@ -15,15 +13,20 @@ const Carrito = ({productosEnCarrito, productosEliminados}) => {
     <div className="mb-4">
       <h2 className="text-white">Carrito</h2>
       <div className="d-flex">
-        {productosEnCarrito.map((producto, indice) => (
-        <div key={indice} className="m-2 p-2  bg-secondary-subtle rounded">
-          <img src={producto.images[indice]} alt={producto.title} height={80} width={80} />
-          <p> {producto.title} : <br /> ${producto.price} USD</p>
-          <button className="btn btn-danger" onClick={() => productosEliminados(indice)}>Eliminar</button>
+        {carrito.map((producto, id) => (
+          
+        <div key={id} className="m-2 p-2  bg-secondary-subtle rounded">
+          <div key={producto.id}>
+          <button className="bg-secondary-subtle text-danger border border-none" onClick={() => eliminarCarrito(producto.id)}><RxCross1 /></button>
+          </div>
+          <img src={producto.img1} alt={producto.nombre} height={80} width={80} />
+          <p> {producto.nombre} : <br /> {producto.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: '0',maximumFractionDigits: 0 })} </p>
+          
+          
         </div>
       ))}
       </div>
-      <h3 className="text-info">Total: ${total} USD</h3>
+      <h3 className="text-info">Total: {total.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: '0',maximumFractionDigits: 0 })} </h3>
     </div>
     </>
   );

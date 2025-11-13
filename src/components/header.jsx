@@ -7,7 +7,7 @@ const Header = () => {
             <ul className="nav nav-pills">
 
                 <Link to="/" className="">
-                <img className="bi me-2" width="60" height="50" aria-hidden="true" src="../public/carrito.png" alt="Imagen Carrito" />
+                <img className="bi me-2" width="60" height="50" aria-hidden="true" src="/carrito.png" alt="Imagen Carrito" />
                 </Link>
                 <li className="nav-item">
                     <Link to="/" className="text-decoration-none">Home</Link>
@@ -18,6 +18,10 @@ const Header = () => {
                 <li className="nav-item">
                     <Link to="/contacto" className="text-decoration-none">Contact</Link>
                 </li>
+                <li className="nav-item">
+                    <Link to="/admin" className="text-decoration-none">Admin</Link>
+                </li>
+                
             </ul>
         </nav>
       </header>

@@ -11,9 +11,10 @@ const Contacto = () =>{
             <div className="container2">
                 <div>
                     <h3 className="text-decoration-underline">Dirección</h3>
-                    <p>📍 Bynon 6948</p>
+                    <p>Bynon 6948</p>
                 </div>
                 <div>
+                    
                     <h3 className="text-decoration-underline">Teléfono</h3>
                     <p>☎️​ +54 9 1132457895</p>
                     <p>☎️​ 4641-0123</p>

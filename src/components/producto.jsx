@@ -1,30 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-const Producto = ({agregarProducto}) =>{
-    const [productos, setProductos] = useState([]);
-    const [loading, setLoading] = useState(true); // Estado para saber si estamos cargando
+import { CarritoContext } from '../context/carritoContext';
 
-    const agregarAlCarrito = (producto) => {
-        setCarrito([...carrito, producto]);   
-    };
+const Producto = ({}) =>{
+
+    const [productos, setProductos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null); 
+
+    const{agregarAlCarrito} = useContext(CarritoContext);
+
+    const url= "https://6915079e84e8bd126af86cf9.mockapi.io/productos";
 
     useEffect(() => {
-        fetch("https://api.escuelajs.co/api/v1/products")
+        fetch(url)
         .then((res) => res.json())
-        .then((datos) => {
-            setProductos(datos); // Guardamos los productos
-            setLoading(false); // Terminó de cargar
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            setLoading(false); // Terminó de cargar aunque haya error
-        });
+        .then((datos) => { setProductos(datos);})
+        .catch((error) => {setError("Error:", error);})
+        .finally(()=> setLoading(false));
     }, []);
     
     if (loading) {
     return <div className="spinner-border text-info" role="status">
                 <span className="visually-hidden">Loading...</span>
-            </div>; // Mensaje mientras carga
+            </div>;
     };
 
 
@@ -36,21 +35,20 @@ const Producto = ({agregarProducto}) =>{
           <div className="col-md-4 mb-3" key={producto.id}>
             <div className="card h-100">
               <img
-                src={producto.images[0]}
+                src={producto.img1}
                 alt={producto.title}
                 className="card-img-top"
               />
               <div className="card-body">
-                <h5 className="card-title">{producto.title}</h5>
+                <h5 className="card-title">{producto.nombre}</h5>
                 <p className="card-text">{producto.description}</p>
-                <strong>${producto.price} USD</strong>
+                <strong>{producto.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: '0',maximumFractionDigits: 0 })}</strong>
                 <br />
                 <br />
-                <Link to={`/productos/${producto.id}` } className='text-decoration-none btn btn-outline-success'>Show more</Link>
+                <Link to={`/productos/${producto.id}` } className='text-decoration-none btn btn-outline-success'>Detalles</Link>
                 <br />
                 <br />
-                <button  className="btn btn-danger mt-2" onClick={() => agregarProducto(producto)}>Buy</button>
-                
+                <button  className="btn btn-danger mt-2" onClick={() => agregarAlCarrito(producto)}>Agregar</button>
               </div>
             </div>
           </div>
