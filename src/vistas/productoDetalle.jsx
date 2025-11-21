@@ -1,6 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { IoArrowBackSharp } from "react-icons/io5";
 
 const ProductoDetalle = () => {
   const { id } = useParams();
@@ -26,7 +25,7 @@ const ProductoDetalle = () => {
 
   return (
     <>
-    <Link to={`/` } className='text-decoration-none btn btn-primary'><IoArrowBackSharp /></Link>
+
     <div className="container my-4 text-white carousel slide " id="carouselExampleIndicators">
       <div className="carousel-indicators mb-2">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -49,11 +48,11 @@ const ProductoDetalle = () => {
       <p className='mt-4'>{producto.descripcion}</p>
       <h3><strong className='text-danger bg-white p-1'>{producto.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: '0',maximumFractionDigits: 0 })}</strong></h3>
       <br />
-      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" aria-label="Previous">
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Previous</span>
       </button>
-      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" aria-label="Next">
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
       </button>

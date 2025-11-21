@@ -48,7 +48,7 @@ const Producto = ({}) =>{
                 <Link to={`/productos/${producto.id}` } className='text-decoration-none btn btn-outline-success'>Detalles</Link>
                 <br />
                 <br />
-                <button  className="btn btn-danger mt-2" onClick={() => agregarAlCarrito(producto)}>Agregar</button>
+                <button aria-label="Comprar"  className="btn btn-danger mt-2" onClick={() => agregarAlCarrito(producto)}>Comprar</button>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect } from "react";
-
+import { createContext, useState, useEffect, } from "react";
+import { toast } from "react-toastify";
 export const ProductoContext = createContext();
 
 export const ProductoProvider = ({ children }) => {
@@ -7,7 +7,6 @@ export const ProductoProvider = ({ children }) => {
   const [cargando, setCargando] = useState(false);
   const api = "https://6915079e84e8bd126af86cf9.mockapi.io/productos";
 
-  // Cargar productos al inicio
   useEffect(() => {
     cargarProductos();
   }, []);
@@ -19,7 +18,7 @@ export const ProductoProvider = ({ children }) => {
       const data = await res.json();
       setProductos(data);
     } catch (error) {
-      console.error("Error al cargar productos:", error);
+      toast.warning("Ocurrió un error al cargar los productos.");
     } finally {
       setCargando(false);
     }
@@ -37,10 +36,10 @@ export const ProductoProvider = ({ children }) => {
 
       const nuevo = await res.json();
       setProductos([...productos, nuevo]);
-      alert("Producto agregado correctamente ✅");
+      toast.success("Producto agregado!");
     } catch (error) {
       console.error(error);
-      alert("Error al agregar producto ❌");
+      toast.warning("Ocurrió un error al agregar el producto.");
     }
   };
 
@@ -52,11 +51,36 @@ export const ProductoProvider = ({ children }) => {
       const res = await fetch(`${api}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Error al eliminar producto");
       setProductos(productos.filter((p) => p.id !== id));
+      toast.info("Producto eliminado");
     } catch (error) {
       console.error(error);
-      alert("Error al eliminar producto ❌");
+      toast.warning("Ocurrió un error al eliminar el producto.");
     }
   };
+  const obtenerProducto = (id) => {
+  return productos.find((p) => p.id === id);
+};
+
+  const editarProducto = async (producto) => {
+  try {
+    const res = await fetch(`${api}/${producto.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(producto),
+    });
+
+    if (!res.ok) throw new Error("Error al editar producto");
+
+    toast.success("Producto editado exitosamente!");
+
+    await cargarProductos();
+
+  } catch (error) {
+    console.error(error);
+    toast.warning("Ocurrió un error al editar el producto.");
+  }
+};
+
 
   return (
     <ProductoContext.Provider
@@ -65,6 +89,8 @@ export const ProductoProvider = ({ children }) => {
         cargando,
         agregarProducto,
         eliminarProducto,
+        obtenerProducto,
+        editarProducto
       }}
     >
       {children}

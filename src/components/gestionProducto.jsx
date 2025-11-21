@@ -1,10 +1,12 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ProductoContext } from "../context/productosContext";
 import { CgTrash } from "react-icons/cg";
+import { FaPen } from "react-icons/fa";
 
 const GestionProducto = () => {
   const { productos, cargando, eliminarProducto } = useContext(ProductoContext);
-
+  const navigate = useNavigate();
   if (cargando) {
     return (
       <div className="spinner-border text-info" role="status">
@@ -20,6 +22,7 @@ const GestionProducto = () => {
         <table className="table table-dark table-striped align-middle text-center">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Imagen</th>
               <th>Nombre</th>
               <th>Precio</th>
@@ -29,6 +32,7 @@ const GestionProducto = () => {
           <tbody>
             {productos.map((producto) => (
               <tr key={producto.id}>
+                <td><p>{producto.id}</p></td>
                 <td>
                   <img
                     src={producto.img1}
@@ -45,11 +49,14 @@ const GestionProducto = () => {
                   })}
                 </td>
                 <td>
-                  <button
-                    className="btn btn-danger btn-sm"
+                  <button aria-label="Eliminar Producto"
+                    className="btn btn-danger btn-sm me-2 "
                     onClick={() => eliminarProducto(producto.id)}
                   >
                     <CgTrash />
+                  </button>
+                  <button aria-label="Editar Producto" className="btn btn-success btn-sm" onClick={() => navigate(`/add?id=${producto.id}`)}>
+                    <FaPen />
                   </button>
                 </td>
               </tr>

@@ -1,6 +1,7 @@
 import { use, useEffect, useState } from "react";
 import Carrito from "../components/carrito";
 import Producto from "../components/producto";
+import BarraBusqueda from "../components/barraBusqueda";
 const Home = () => {
   const [carrito, setCarrito] = useState([]);
   const agregarAlCarrito = (producto) => {
@@ -13,9 +14,13 @@ const Home = () => {
 
   return (
     <>
-    <Producto agregarProducto={agregarAlCarrito}/>
-    <hr className="text-white"/>
-    <Carrito  productosEnCarrito={carrito}  productosEliminados={eliminarDelCarrito}/>
+    <BarraBusqueda/>
+    <div className="d-flex  justify-content-evenly">
+        
+        <Producto agregarProducto={agregarAlCarrito}/>
+        <Carrito    productosEnCarrito={carrito}  productosEliminados={eliminarDelCarrito}/>
+    </div>
+    
     </>
   );
 };
