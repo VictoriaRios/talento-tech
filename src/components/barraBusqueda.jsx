@@ -13,7 +13,7 @@ const BarraBusqueda = () => {
     }
 
     return(
-        <div>
+        <div className='mt-2'>
             <form className="d-flex" role="search" onSubmit={submitBusqueda}>
                 <input 
                     className="form-control me-2" 

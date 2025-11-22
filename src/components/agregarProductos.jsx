@@ -1,18 +1,20 @@
-import { useState, useContext, useEffect } from "react";
-import { ProductoContext } from "../context/productosContext";
+import { useState, useEffect } from "react";
+import { useProducto } from "../context/productosContext";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
 
 
 const FormularioAdd = () => {
-  const { agregarProducto, editarProducto, obtenerProducto } = useContext(ProductoContext);
+  const { agregarProducto, editarProducto, obtenerProducto } = useProducto();
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const idEditar = params.get("id"); 
+  
     console.log("ID de edición:", idEditar);
   const [errores, setErrores] = useState({});
   const [producto, setProducto] = useState({
+    marca: "",
     nombre: "",
     precio: "",
     descripcion: "",
@@ -26,6 +28,7 @@ const FormularioAdd = () => {
       const prod = obtenerProducto(idEditar);
       if (prod) {
         setProducto({
+          marca: prod.marca,
           nombre: prod.nombre,
           precio: prod.precio,
           descripcion: prod.descripcion,
@@ -44,6 +47,9 @@ const FormularioAdd = () => {
 
   const validarFormulario = () => {
     const nuevosErrores = {};
+    
+    if (!producto.marca.trim())
+      nuevosErrores.marca = "La marca es obligatoria.";
 
     if (!producto.nombre.trim())
       nuevosErrores.nombre = "El nombre es obligatorio.";
@@ -87,6 +93,7 @@ const FormularioAdd = () => {
   }
 
   setProducto({
+    marca: "",
     nombre: "",
     precio: "",
     descripcion: "",
@@ -100,82 +107,98 @@ const FormularioAdd = () => {
 };
 
 
-  return (
-    <div className="container text-white p-4 my-4">
-      <h2 className="mb-4">{idEditar ? "Editar Producto" : "Agregar Producto"}</h2>
-      <Link to={`/admin`} className="text-decoration-none btn btn-primary">
-        <IoArrowBackSharp />
-      </Link>
-      <form onSubmit={submit} className="bg-dark p-4 rounded">
-        <div>
-          <label className="form-label">Nombre:</label>
-          <input
-            className="form-control"
-            type="text"
-            name="nombre"
-            value={producto.nombre}
-            onChange={handleChange}
-          />
-          {errores.nombre && <p style={{ color: "red" }}>{errores.nombre}</p>}
+  return (  
+      <div className=" text-white p-4 my-4">
+        <div className="titleAgregar">
+          <h2 className="ms-5 me-5">{idEditar ? "Editar Producto" : "Agregar Producto"}</h2>
+          <Link to={`/admin`} className="text-decoration-none btn btn-primary me-3">
+            <IoArrowBackSharp />
+          </Link>
         </div>
-        <div>
-          <label className="form-label">Precio:</label>
-          <input
-            className="form-control"
-            type="number"
-            name="precio"
-            value={producto.precio}
-            onChange={handleChange}
-            min={0}
-            step="any"
-          />
-          {errores.precio && <p style={{ color: "red" }}>{errores.precio}</p>}
-        </div>
-        <div>
-          <label className="form-label">Descripción:</label>
-          <textarea
-            className="form-control"
-            name="descripcion"
-            value={producto.descripcion}
-            onChange={handleChange}
-          />
-          {errores.descripcion && (
-            <p style={{ color: "red" }}>{errores.descripcion}</p>
-          )}
-        </div>
-        <div>
-          <label className="form-label">Imagen 1:</label>
-          <input
-            className="form-control"
-            type="text"
-            name="img1"
-            value={producto.img1}
-            onChange={handleChange}
-          />
-          <label className="form-label">Imagen 2:</label>
-          <input
-            className="form-control"
-            type="text"
-            name="img2"
-            value={producto.img2}
-            onChange={handleChange}
-          />
-          <label className="form-label">Imagen 3:</label>
-          <input
-            className="form-control"
-            type="text"
-            name="img3"
-            value={producto.img3}
-            onChange={handleChange}
-          />
-          {errores.img1 && <p style={{ color: "red" }}>{errores.img1}</p>}
-          {errores.img2 && <p style={{ color: "red" }}>{errores.img2}</p>}
-          {errores.img3 && <p style={{ color: "red" }}>{errores.img3}</p>}
-        </div>
-        <button aria-label="Agregar Producto" className="mb-4 mt-4 btn btn-outline-success" type="submit">
-          {idEditar ? "Actualizar Producto" : "Agregar Producto"}
-        </button>
-      </form>
+        <form onSubmit={submit} className="bg-dark p-4 rounded">
+          <div>
+            <label className="form-label">Marca:</label>
+            <input
+              className="form-control"
+              type="text"
+              name="marca"
+              value={producto.marca}
+              onChange={handleChange}
+            />
+            {errores.marca && <p style={{ color: "red" }}>{errores.marca}</p>}
+          </div>
+          <div>
+            <label className="form-label">Nombre:</label>
+            <input
+              className="form-control"
+              type="text"
+              name="nombre"
+              value={producto.nombre}
+              onChange={handleChange}
+            />
+            {errores.nombre && <p style={{ color: "red" }}>{errores.nombre}</p>}
+          </div>
+          <div>
+            <label className="form-label">Precio:</label>
+            <input
+              className="form-control"
+              type="number"
+              name="precio"
+              value={producto.precio}
+              onChange={handleChange}
+              min={0}
+              step="any"
+            />
+            {errores.precio && <p style={{ color: "red" }}>{errores.precio}</p>}
+          </div>
+          <div>
+            <label className="form-label">Descripción:</label>
+            <textarea
+              className="form-control"
+              name="descripcion"
+              value={producto.descripcion}
+              onChange={handleChange}
+            />
+            {errores.descripcion && (
+              <p style={{ color: "red" }}>{errores.descripcion}</p>
+            )}
+          </div>
+          <div>
+            <label className="form-label">Imagen 1:</label>
+            <input
+              className="form-control"
+              type="text"
+              name="img1"
+              value={producto.img1}
+              onChange={handleChange}
+            />
+            <label className="form-label">Imagen 2:</label>
+            <input
+              className="form-control"
+              type="text"
+              name="img2"
+              value={producto.img2}
+              onChange={handleChange}
+            />
+            <label className="form-label">Imagen 3:</label>
+            <input
+              className="form-control"
+              type="text"
+              name="img3"
+              value={producto.img3}
+              onChange={handleChange}
+            />
+            {errores.img1 && <p style={{ color: "red" }}>{errores.img1}</p>}
+            {errores.img2 && <p style={{ color: "red" }}>{errores.img2}</p>}
+            {errores.img3 && <p style={{ color: "red" }}>{errores.img3}</p>}
+          </div>
+          <div className="buttonForm">
+            <button aria-label="Agregar Producto" className="mt-4 btn btn-outline-success" type="submit">
+            {idEditar ? "Actualizar Producto" : "Agregar Producto"}
+          </button>
+          </div>
+          
+        </form>
     </div>
   );
 };

@@ -1,10 +1,16 @@
-import { useState, useContext, createContext } from "react";
-
+import { useState, useContext, createContext,useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 const AutenticacionContext = createContext();
 
 export const AutenticacionProvider = ({ children }) => {
     const [usuario, setUsuario] = useState(null);
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        localStorage.removeItem("token");
+        setUsuario(null);
+    }, []);
     const login = (nombreUsuario) => {
         const token = 'fake-token-${nombreUsuario}';
         localStorage.setItem('token', token);
@@ -14,7 +20,8 @@ export const AutenticacionProvider = ({ children }) => {
     const logout = () =>{
         localStorage.removeItem('token');
         setUsuario(null);
-        
+        navigate('/');
+        toast.warn("Sesión Cerrada",{position: "top-center",autoClose: 1500});
     }
 
     return(

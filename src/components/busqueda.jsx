@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import BarraBusqueda from "./barraBusqueda";
 
 const Buscar = () => {
     const { termino } = useParams();
@@ -16,7 +17,8 @@ const Buscar = () => {
             .then(res => res.json())
             .then(data => {
                 const filtrados = data.filter(prod =>
-                    prod.nombre.toLowerCase().includes(termino.toLowerCase())
+                    prod.nombre.toLowerCase().includes(termino.toLowerCase()) ||
+                    prod.marca.toLowerCase().includes(termino.toLowerCase())
                 );
                 setProductos(filtrados);
             })
@@ -34,7 +36,8 @@ const Buscar = () => {
     return (
         <>
         <div className="container my-4">
-            <h1 className="text-white text-center mb-4">
+            <BarraBusqueda />
+            <h1 className="text-white text-center mb-4 mt-3">
                 Resultados para: <span className="text-info">{termino}</span>
             </h1>
 

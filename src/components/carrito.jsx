@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { CarritoContext } from "../context/carritoContext";
+import { useCarrito } from "../context/carritoContext";
 import { RxCross1 } from "react-icons/rx";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiTrash } from "react-icons/ci";
 const Carrito = () => {
-  const {carrito, eliminarCarrito,total,vaciarCarrito} = useContext(CarritoContext);
+  const {carrito, eliminarCarrito,total,vaciarCarrito} = useCarrito();
 
   if (carrito.length === 0) {
     return 

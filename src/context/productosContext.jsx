@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 export const ProductoContext = createContext();
 
@@ -18,7 +18,7 @@ export const ProductoProvider = ({ children }) => {
       const data = await res.json();
       setProductos(data);
     } catch (error) {
-      toast.warning("Ocurrió un error al cargar los productos.");
+      toast.warning("Ocurrió un error al cargar los productos.",{position: "top-center",autoClose: 1500});
     } finally {
       setCargando(false);
     }
@@ -36,10 +36,10 @@ export const ProductoProvider = ({ children }) => {
 
       const nuevo = await res.json();
       setProductos([...productos, nuevo]);
-      toast.success("Producto agregado!");
+      toast.success("Producto agregado!",{position: "top-center",autoClose: 1500});
     } catch (error) {
       console.error(error);
-      toast.warning("Ocurrió un error al agregar el producto.");
+      toast.warning("Ocurrió un error al agregar el producto.",{position: "top-center",autoClose: 1500});
     }
   };
 
@@ -51,10 +51,10 @@ export const ProductoProvider = ({ children }) => {
       const res = await fetch(`${api}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Error al eliminar producto");
       setProductos(productos.filter((p) => p.id !== id));
-      toast.info("Producto eliminado");
+      toast.info("Producto eliminado",{position: "top-center",autoClose: 1500});
     } catch (error) {
       console.error(error);
-      toast.warning("Ocurrió un error al eliminar el producto.");
+      toast.warning("Ocurrió un error al eliminar el producto.",{position: "top-center",autoClose: 1500});
     }
   };
   const obtenerProducto = (id) => {
@@ -71,13 +71,13 @@ export const ProductoProvider = ({ children }) => {
 
     if (!res.ok) throw new Error("Error al editar producto");
 
-    toast.success("Producto editado exitosamente!");
+    toast.success("Producto editado exitosamente!",{position: "top-center",autoClose: 1500});
 
     await cargarProductos();
 
   } catch (error) {
     console.error(error);
-    toast.warning("Ocurrió un error al editar el producto.");
+    toast.warning("Ocurrió un error al editar el producto.",{position: "top-center",autoClose: 1500});
   }
 };
 
@@ -97,3 +97,5 @@ export const ProductoProvider = ({ children }) => {
     </ProductoContext.Provider>
   );
 };
+
+export const useProducto = () => useContext(ProductoContext);

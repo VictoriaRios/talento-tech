@@ -15,9 +15,9 @@ const Login = ()=>{
         if(usuario === 'admin' && password === 'admin123'){
             login(usuario);
             navigate('/admin');
-            toast.success(`Bienvenido ${usuario}`);
+            toast.success(`Bienvenido ${usuario}`,{position: "top-center",autoClose: 1500});
         }else{
-            toast.warning("Acceso denegado");
+            toast.warning("Acceso denegado",{position: "top-center",autoClose: 1500});
         }
     }
 
@@ -25,7 +25,10 @@ const Login = ()=>{
         <>
         <form onSubmit={submitLogin}>
             <div className='bg-white p-5 rounded-3'>
+                <div className='iconUser'>
                 <h1 className='mt-2 mb-4 ' ><FaRegUser className='fs-1'/></h1>
+                </div>
+                
                 <div className='form-floating'>
                     <input type="text" className='form-control  border-dark-subtle' placeholder='Usuario' value={usuario} onChange={(evento) => setUsuario(evento.target.value)} />
                     <label for="floatingInput">Usuario</label>
@@ -36,7 +39,10 @@ const Login = ()=>{
                     <label for="floatingInput">Contraseña</label>
                 </div>
                 <br />
-                <button type='submit' className='btn btn-primary' aria-label="Iniciar Sesión">Iniciar Sesión</button>
+                <div className='iconUser'>
+                    <button type='submit' className=' btn btn-primary' aria-label="Iniciar Sesión">Iniciar Sesión</button>
+                </div>
+                
             </div>
         </form>
         </>

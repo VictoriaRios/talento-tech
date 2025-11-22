@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import {useState } from "react";
 import Carrito from "../components/carrito";
 import Producto from "../components/producto";
 import BarraBusqueda from "../components/barraBusqueda";
@@ -14,15 +14,12 @@ const Home = () => {
 
   return (
     <>
-    <BarraBusqueda/>
-    <div className="d-flex  justify-content-evenly">
-        
-        <Producto agregarProducto={agregarAlCarrito}/>
-        <Carrito    productosEnCarrito={carrito}  productosEliminados={eliminarDelCarrito}/>
-    </div>
-    
+      <BarraBusqueda />
+      <div className="d-flex  justify-content-evenly">
+          <Producto agregarProducto={agregarAlCarrito}/>
+          <Carrito    productosEnCarrito={carrito}  productosEliminados={eliminarDelCarrito}/>
+      </div>
     </>
   );
 };
-
 export default Home;
