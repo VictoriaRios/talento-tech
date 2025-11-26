@@ -16,7 +16,7 @@ const Header = () => {
               width="60"
               height="50"
               aria-hidden="true"
-              src="./public/logo.png"
+              src="/logo.png"
               alt="Imagen Carrito"
             />
           </Link>
