@@ -14,10 +14,15 @@ const Home = () => {
 
   return (
     <>
-      <BarraBusqueda />
-      <div className="d-flex  justify-content-evenly">
-          <Producto agregarProducto={agregarAlCarrito}/>
-          <Carrito    productosEnCarrito={carrito}  productosEliminados={eliminarDelCarrito}/>
+      <div className="contenedorHome">
+        <BarraBusqueda />
+          <div className="d-flex flex-column flex-md-row justify-content-evenly">
+              <Producto agregarProducto={agregarAlCarrito}/>
+              <div className="">
+                <Carrito    productosEnCarrito={carrito}  productosEliminados={eliminarDelCarrito}/>
+              </div>
+              
+          </div>
       </div>
     </>
   );

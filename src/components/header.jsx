@@ -12,11 +12,11 @@ const Header = () => {
         <div className="d-flex align-items-center mb-3 mb-md-0  link-body-emphasis text-decoration-none">
           <Link to="/" className="">
             <img
-              className="bi me-2 me-4"
+              className="me-2 rounded"
               width="60"
               height="50"
               aria-hidden="true"
-              src="../../public/carrito3.png"
+              src="../../public/logo.png"
               alt="Imagen Carrito"
             />
           </Link>

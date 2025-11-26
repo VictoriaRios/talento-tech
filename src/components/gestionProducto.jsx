@@ -25,12 +25,12 @@ const GestionProducto = () => {
   }
 
   return (
-    <div className="text-white container my-4">
+    <div className="contenedor text-white container my-4">
       <BarraBusqueda />
 
       {productos.length > 0 ? (
         <>
-          <table className="table table-dark table-striped align-middle text-center mt-4">
+          <table className="tabla table table-dark table-striped align-middle text-center mt-4">
             <thead>
               <tr>
                 <th>Imagen</th>

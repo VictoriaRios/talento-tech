@@ -82,6 +82,13 @@ header{
 .buttonForm{
   text-align: center;
 }
+.carrito-wrapper {
+  width: 100%;
+}
+iframe{
+    width:600px ;
+    height: 450px;
+  }
 /* footer.css */
 footer {
     position: fixed;
@@ -89,3 +96,76 @@ footer {
   left: 0;
   width: 100%;
 }
+
+
+/* 📱 En celular pasa abajo */
+@media (max-width: 768px) {
+  .carrito-wrapper {
+    position: fixed;
+    height: 20%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    width: 100%;
+    background: white;
+    border-radius: 0 !important;
+    overflow-y: auto; 
+    padding-bottom: 20px;
+  }
+  .titleUs{
+    margin-top: 20%;
+  }
+  .firstContainer{
+    margin-top: 15%;
+    display: block;
+    align-items: center;
+  }
+  .container1{
+    display: flex;
+    align-items: center;
+    flex-direction: column  ;
+  }
+  iframe{
+    align-items: center;
+    width:350px ;
+    height: 300px;
+  }
+  .container2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin:10px ;
+    justify-content: space-around;
+    margin-top: 8%;
+  }
+  .containerAdmin{
+    margin-top: 30%;
+  }
+  .barraBuqueda{
+    width: 90%;
+  }
+  .tabla{
+    width: 90%;
+    margin: 0%;
+    overflow-x: auto; 
+  }
+}
+@media (min-width: 769px) and (max-width: 992px) {
+  .containerAdmin,.contenedorBusqueda,.contenedorHome{
+    margin-top: 12%;
+  }
+  .firstContainer{
+    display: flex;
+  }
+  .container2{
+    margin-left:100px ;
+  }
+  iframe{
+    align-items: center;
+    width:450px ;
+    height: 300px;
+  }
+}
+
+

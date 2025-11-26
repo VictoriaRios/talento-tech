@@ -1,7 +1,7 @@
 const Us = () =>{
     return(
         <>
-        <div className="container text-white">
+        <div className=" container text-white">
             <h2 className="titleUs">Nuestra Historia</h2>
             <hr />
             <p>Ubicados en el corazón de Liniers, a la vuelta de la emblemática Iglesia de San Cayetano, somos un almacén de barrio que mantiene viva la esencia de la cercanía y la atención personalizada. Desde nuestros comienzos, nos propusimos ofrecer a nuestros vecinos productos frescos, de calidad y a precios justos, en un ambiente cálido y familiar. Cada cliente que entra por nuestra puerta es recibido con la misma amabilidad de siempre, porque creemos que la buena atención es tan importante como el producto que llevás a tu mesa.</p>

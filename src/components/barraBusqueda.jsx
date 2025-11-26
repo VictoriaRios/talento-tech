@@ -13,12 +13,12 @@ const BarraBusqueda = () => {
     }
 
     return(
-        <div className='mt-2'>
+        <div className='mt-2 barraBuqueda'>
             <form className="d-flex" role="search" onSubmit={submitBusqueda}>
                 <input 
                     className="form-control me-2" 
                     type="search" 
-                    placeholder="Buscar producto" 
+                    placeholder="Buscar producto o marca" 
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
                 />

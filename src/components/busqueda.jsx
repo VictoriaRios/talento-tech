@@ -35,7 +35,7 @@ const Buscar = () => {
 
     return (
         <>
-        <div className="container my-4">
+        <div className="contenedorBusqueda container my-4">
             <BarraBusqueda />
             <h1 className="text-white text-center mb-4 mt-3">
                 Resultados para: <span className="text-info">{termino}</span>
